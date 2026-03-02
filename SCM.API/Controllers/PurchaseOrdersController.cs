@@ -181,5 +181,26 @@ namespace SCM.API.Controllers
 
         //    return Ok("Status updated successfully");
         //}
+        [HttpGet]
+        public IActionResult GetAllPOs()
+        {
+            var pos = _context.PurchaseOrders
+                .Select(po => new
+                {
+                    po.Id,
+                    po.PONumber,
+                    VendorName = po.Vendor.Name,
+                    po.WarehouseId,
+                    po.Status,
+                    po.TotalAmount,
+                    po.CreatedAt,
+                    ItemCount = po.Items.Count
+                })
+                .OrderByDescending(po => po.CreatedAt)
+                .ToList();
+
+            return Ok(pos);
+        }
+
     }
 }
