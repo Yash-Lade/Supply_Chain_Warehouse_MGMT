@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SCM.API.Data;
 using SCM.API.Models;
+using SCM_System.DTOs.Inventory;
+using SCM_System.Services;
 
 namespace SCM.API.Controllers
 {
@@ -11,10 +14,11 @@ namespace SCM.API.Controllers
     public class InventoryController : ControllerBase
     {
         private readonly AppDbContext _context;
-
-        public InventoryController(AppDbContext context)
+        private readonly RolService _rolService;
+        public InventoryController(AppDbContext context, RolService rolService)
         {
             _context = context;
+            _rolService = rolService;
         }
 
         [HttpPost("add-stock")]
@@ -32,7 +36,7 @@ namespace SCM.API.Controllers
             var warehouseExists = _context.Warehouses.Any(w => w.Id == warehouseId);
             if (!warehouseExists)
                 return BadRequest("Invalid WarehouseId");
-            
+
             // Check if batch exists
             var batch = _context.Batches
                 .FirstOrDefault(b => b.ItemId == itemId && b.BatchNumber == batchNumber);
@@ -246,6 +250,49 @@ namespace SCM.API.Controllers
                 return StatusCode(500, "Transfer failed");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetInventory()
+        {
+            var items = await _context.Items
+                .Where(i => i.IsActive)
+                .ToListAsync();
+
+            var result = new List<InventoryItemDto>();
+
+            foreach (var item in items)
+            {
+                // 1️⃣ Current Stock
+                var currentStock = await _context.Stock
+                    .Include(s => s.Batch)
+                    .Where(s => s.Batch.ItemId == item.Id)
+                    .SumAsync(s => (decimal?)s.Quantity) ?? 0;
+
+                // 2️⃣ Get Preferred Vendor
+                var vendorItem = await _context.VendorItems
+                    .Where(v => v.ItemId == item.Id && v.IsPreferred)
+                    .FirstOrDefaultAsync();
+
+                decimal rol = 0;
+
+                if (vendorItem != null)
+                {
+                    rol = await _rolService
+                        .CalculateRolAsync(item.Id, vendorItem.VendorId);
+                }
+
+                result.Add(new InventoryItemDto
+                {
+                    ItemId = item.Id,
+                    ItemName = item.Name,
+                    WarehouseName = "Main Warehouse", // adjust if multi-warehouse logic added
+                    CurrentStock = currentStock,
+                    Rol = rol,
+                    CriticalLevel = item.MinStockLevel
+                });
+            }
+
+            return Ok(result);
+        }
     }
-    
 }
