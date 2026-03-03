@@ -6,6 +6,9 @@ using SCM.API.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using SCM_System.DTOs.Auth;
+using SCM_System.Helpers;
+
 
 namespace SCM.API.Controllers
 {
@@ -25,14 +28,19 @@ namespace SCM.API.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDto dto)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Email == dto.Email);
+            var user = _context.Users.FirstOrDefault(u =>
+                u.Email == dto.Email &&
+                u.PasswordHash == PasswordHelper.HashPassword(dto.Password));
 
             if (user == null)
                 return Unauthorized("Invalid credentials");
 
+            
             // For now plain comparison (we will hash later)
-            if (user.PasswordHash != dto.Password)
-                return Unauthorized("Invalid credentials");
+            //if (user.PasswordHash != dto.Password)
+            //    return Unauthorized("Invalid credentials");
+
+            
 
             var claims = new[]
             {
@@ -59,6 +67,41 @@ namespace SCM.API.Controllers
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] RegisterDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Email) ||
+                string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest("Email and Password required");
+
+            var existingUser = _context.Users
+                .Any(u => u.Email == dto.Email);
+
+            if (existingUser)
+                return BadRequest("User already exists");
+
+            // Validate role
+            var validRoles = new[] { 1, 2, 3, 4 };
+
+            if (!validRoles.Contains(dto.RoleId))
+                return BadRequest("Invalid role");
+
+            var hashedPassword = PasswordHelper.HashPassword(dto.Password);
+
+            var user = new User
+            {
+                Email = dto.Email,
+                PasswordHash = hashedPassword,
+                RoleId = dto.RoleId
+            };
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return Ok("User registered successfully");
         }
     }
 }
