@@ -93,15 +93,16 @@ namespace SCM.API.Controllers
 
             var user = new User
             {
+                FullName = dto.FullName,
                 Email = dto.Email,
                 PasswordHash = hashedPassword,
-                RoleId = dto.RoleId
+                RoleId = dto.RoleId,
             };
 
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return Ok("User registered successfully");
+            return Ok(new { message = "User registered successfully" });
         }
     }
 }
