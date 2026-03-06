@@ -68,6 +68,4 @@ publish/
 # Secrets
 appsettings.Development.json
 
-# Test Results
-TestResults/
->>>>>>> 5e3feb843f0d5ded2fc113c7ab0b8e3ba4b1e66c
+.vscode/
