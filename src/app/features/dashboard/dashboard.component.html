@@ -1,0 +1,114 @@
+<!-- <div *ngIf="loading" class="spinner">
+  <mat-spinner diameter="40"></mat-spinner>
+</div>
+
+<div class="kpi-grid" *ngIf="!loading">
+
+  <div class="glass-card kpi-card">
+    <h3>Total POs</h3>
+    <h1>{{ kpis.totalPOs }}</h1>
+  </div>
+
+  <div class="glass-card kpi-card">
+    <h3>Pending Approvals</h3>
+    <h1>{{ kpis.pendingApprovals }}</h1>
+  </div>
+
+  <div class="glass-card kpi-card">
+    <h3>Low Stock Items</h3>
+    <h1>{{ kpis.lowStockItems }}</h1>
+  </div>
+
+  <div class="glass-card kpi-card">
+    <h3>Received Today</h3>
+    <h1>{{ kpis.receivedToday }}</h1>
+  </div>
+
+</div>
+
+<mat-card class="chart-card glass-card" *ngIf="!loading">
+  <h3>Purchase Order Trend</h3>
+  <canvas baseChart
+          [data]="chartData"
+          [options]="chartOptions"
+          chartType="line">
+  </canvas>
+</mat-card> -->
+
+<div class="dashboard-container">
+
+  <h1 class="dashboard-title">Dashboard</h1>
+  <p class="subtitle">Overview of your supply chain operations</p>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+
+    <mat-card class="kpi-card">
+      <div class="kpi-content">
+        <div>
+          <h4>Total POs</h4>
+          <h2>{{totalPOs}}</h2>
+        </div>
+        <mat-icon color="primary">shopping_cart</mat-icon>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <div class="kpi-content">
+        <div>
+          <h4>Pending Approvals</h4>
+          <h2>{{pendingApprovals}}</h2>
+        </div>
+        <mat-icon color="accent">pending</mat-icon>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <div class="kpi-content">
+        <div>
+          <h4>Low Stock Items</h4>
+          <h2>{{lowStock}}</h2>
+        </div>
+        <mat-icon color="warn">warning</mat-icon>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <div class="kpi-content">
+        <div>
+          <h4>Received Today</h4>
+          <h2>{{receivedToday}}</h2>
+        </div>
+        <mat-icon>inventory</mat-icon>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <!-- CHART SECTION -->
+  <div class="charts-grid">
+
+    <mat-card>
+      <h3>Purchase Order Trend</h3>
+      <canvas baseChart
+        [data]="poChartData"
+        [type]="'line'">
+      </canvas>
+    </mat-card>
+
+    <mat-card>
+      <h3>Stock Distribution</h3>
+      <canvas baseChart
+        [data]="stockChartData"
+        [type]="'pie'">
+      </canvas>
+    </mat-card>
+
+  </div>
+
+  <div class="dashboard-tables">
+    <app-pending-approvals></app-pending-approvals>
+    <app-low-stock-table></app-low-stock-table>
+
+  </div>
+</div>
