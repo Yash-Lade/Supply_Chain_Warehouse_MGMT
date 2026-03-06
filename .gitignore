@@ -68,4 +68,17 @@ publish/
 # Secrets
 appsettings.Development.json
 
+# Test Results
+TestResults/
+
+
+node_modules/
+/dist/
+/out-tsc/
+.angular/
+*.log
+npm-debug.log
+yarn-error.log
+
+.vscode/
 .vscode/
