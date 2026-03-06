@@ -1,3 +1,15 @@
+# SCM System Backend
+
+- ASP.NET Core 8 Web API
+- SQL Server
+- JWT Authentication
+- Hangfire
+- ROL Automation
+- Approval Workflow
+- GRN Processing
+
+
+
 # ScmsFrontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
