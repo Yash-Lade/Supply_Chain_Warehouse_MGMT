@@ -1,4 +1,4 @@
-<h2>Items</h2>
+<!-- <h2>Items</h2>
 
 <table class="table">
   <thead>
@@ -24,4 +24,61 @@
       <td>{{ item.maxStockLevel }}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+<div class="glass-card">
+
+  <h2>Items</h2>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- SKU -->
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>SKU</th>
+      <td mat-cell *matCellDef="let row">{{ row.sku }}</td>
+    </ng-container>
+
+    <!-- Unit -->
+    <ng-container matColumnDef="unitType">
+      <th mat-header-cell *matHeaderCellDef>Unit</th>
+      <td mat-cell *matCellDef="let row">{{ row.unitType }}</td>
+    </ng-container>
+
+    <!-- ABC -->
+    <ng-container matColumnDef="abcClass">
+      <th mat-header-cell *matHeaderCellDef>ABC</th>
+      <td mat-cell *matCellDef="let row">{{ row.abcClass }}</td>
+    </ng-container>
+
+    <!-- XYZ -->
+    <ng-container matColumnDef="xyzClass">
+      <th mat-header-cell *matHeaderCellDef>XYZ</th>
+      <td mat-cell *matCellDef="let row">{{ row.xyzClass }}</td>
+    </ng-container>
+
+    <!-- Min Stock -->
+    <ng-container matColumnDef="minStockLevel">
+      <th mat-header-cell *matHeaderCellDef>Min Stock</th>
+      <td mat-cell *matCellDef="let row">{{ row.minStockLevel }}</td>
+    </ng-container>
+
+    <!-- Max Stock -->
+    <ng-container matColumnDef="maxStockLevel">
+      <th mat-header-cell *matHeaderCellDef>Max Stock</th>
+      <td mat-cell *matCellDef="let row">{{ row.maxStockLevel }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+  <mat-paginator [pageSize]="5"></mat-paginator>
+
+</div>

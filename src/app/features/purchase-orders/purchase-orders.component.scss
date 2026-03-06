@@ -10,3 +10,30 @@
   justify-content: center;
   margin: 20px 0;
 }
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-pending {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}

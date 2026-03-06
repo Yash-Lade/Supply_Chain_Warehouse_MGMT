@@ -1,13 +1,16 @@
+export interface Approval {
+  level: number;
+  role: string;
+  status: string;
+}
+
 export interface PurchaseOrder {
   id: number;
   poNumber: string;
   vendorName: string;
+  warehouseId: number;
+  status: string;
   totalAmount: number;
-  status: 'Draft' | 'PendingApproval' | 'Approved' | 'Received' | 'Rejected';
-  createdDate: string;
-
-  level1Approved?: boolean;
-  level2Approved?: boolean;
-  level3Approved?: boolean;
-
+  createdAt: string;
+  approvals: Approval[];
 }

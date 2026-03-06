@@ -27,12 +27,8 @@ export class PurchaseOrderService {
     return this.http.post(`${this.baseUrl}/${id}/submit`, {});
   }
 
-  approve(id:number,body:any){
-
-  return this.http.put(
-
-  `/api/purchaseorders/${id}/approve`,
-  body);
+  approve(poId:number, body:any){
+      return this.http.put(`${this.baseUrl}/${poId}/approve`, body);
   }
 
   getByPoNumber(poId: string) {
