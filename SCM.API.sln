@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCM.API", "SCM.API\SCM.API.csproj", "{3D1E4A9C-B84C-41C3-81F6-1087D5485FDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D1E4A9C-B84C-41C3-81F6-1087D5485FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1E4A9C-B84C-41C3-81F6-1087D5485FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1E4A9C-B84C-41C3-81F6-1087D5485FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1E4A9C-B84C-41C3-81F6-1087D5485FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EFFB5E15-6FCF-4C52-BE8A-4BA187E33E7E}
+	EndGlobalSection
+EndGlobal

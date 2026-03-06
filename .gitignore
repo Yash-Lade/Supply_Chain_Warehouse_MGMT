@@ -1,5 +1,3 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
 /dist
 /tmp
@@ -42,3 +40,34 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+=======
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# VS Code
+.vscode/
+
+# Logs
+*.
+# OS
+.DS_Store
+Thumbs.db
+
+# Publish
+publish/
+
+# Secrets
+appsettings.Development.json
+
+# Test Results
+TestResults/
+>>>>>>> 5e3feb843f0d5ded2fc113c7ab0b8e3ba4b1e66c
