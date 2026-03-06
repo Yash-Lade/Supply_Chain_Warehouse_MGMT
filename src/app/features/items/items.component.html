@@ -1,0 +1,27 @@
+<h2>Items</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>SKU</th>
+      <th>Unit</th>
+      <th>ABC</th>
+      <th>XYZ</th>
+      <th>Min Stock</th>
+      <th>Max Stock</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.name }}</td>
+      <td>{{ item.sku }}</td>
+      <td>{{ item.unitType }}</td>
+      <td>{{ item.abcClass }}</td>
+      <td>{{ item.xyzClass }}</td>
+      <td>{{ item.minStockLevel }}</td>
+      <td>{{ item.maxStockLevel }}</td>
+    </tr>
+  </tbody>
+</table>

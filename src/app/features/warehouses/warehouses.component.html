@@ -1,0 +1,19 @@
+<h2>Warehouses</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let w of warehouses">
+      <td>{{ w.name }}</td>
+      <td>{{ w.location }}</td>
+      <td>{{ w.isActive ? 'Active' : 'Inactive' }}</td>
+    </tr>
+  </tbody>
+</table>

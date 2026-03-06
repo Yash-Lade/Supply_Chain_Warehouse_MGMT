@@ -1,0 +1,51 @@
+<div class="login-wrapper">
+  <div class="login-card">
+
+    <div class="logo-section">
+      <div class="logo-circle"></div>
+      <h1>Supply Chain and Warehouse Management System</h1>
+      <p class="subtitle">Secure</p>
+    </div>
+
+    <form class="login-form"
+          [formGroup]="loginForm"
+          (ngSubmit)="login()">
+
+      <div class="input-group">
+        <input
+          type="email"
+          placeholder="USERNAME"
+          formControlName="email"
+          required />
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          placeholder="PASSWORD"
+          formControlName="password"
+          required />
+      </div>
+
+      <div class="options">
+        <label>
+          <input type="checkbox" />
+          Remember Me
+        </label>
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button
+        class="login-btn"
+        type="submit"
+        [disabled]="loginForm.invalid">
+        ACCESS →
+      </button>
+
+      <p class="register">
+        Not registered?  <a routerLink="/register">Create an account</a>
+      </p>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Create Purchase Order</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()" mat-dialog-content>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Vendor Name</mat-label>
+    <input matInput formControlName="vendorName">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Total Amount</mat-label>
+    <input matInput type="number" formControlName="totalAmount">
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit"
+            [disabled]="form.invalid">
+      Create
+    </button>
+  </div>
+
+</form>
