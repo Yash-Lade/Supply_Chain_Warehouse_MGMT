@@ -1,0 +1,23 @@
+.topbar{
+  height:60px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.title{
+  font-weight:600;
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.user{
+  font-weight:500;
+}

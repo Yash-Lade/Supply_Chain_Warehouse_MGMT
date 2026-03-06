@@ -1,0 +1,259 @@
+/* =========================
+   GLOBAL THEME VARIABLES & BASE
+========================= */
+
+@use 'variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap');
+
+// fallback definitions in case variables file isn't processed early
+$bg-start: #0f172a;
+$bg-end:   #1e293b;
+$accent-1: #06b6d4;
+$accent-2: #3b82f6;
+$neon     : #8e2de2;
+$text     : #222222;
+$muted    : #94a3b8;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top left, $bg-end, $bg-start);
+  color: $text;
+  overflow-x: hidden;
+  animation: bg-shift 30s ease infinite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+@keyframes bg-shift {
+  0% { background-position: top left; }
+  50% { background-position: bottom right; }
+  100% { background-position: top left; }
+}
+
+/* Smooth scroll */
+* {
+  scroll-behavior: smooth;
+}
+
+/* custom scrollbar to match dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+/* =========================
+   GLASS CARD SYSTEM
+========================= */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+      0 12px 48px rgba(0, 0, 0, 0.6),
+      0 0 12px $accent-1;
+  }
+}
+
+/* =========================
+   MATERIAL DARK OVERRIDES
+========================= */
+
+.mat-mdc-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.mat-mdc-table {
+  background: transparent;
+  color: #151515;
+}
+
+.mat-mdc-header-cell {
+  color: #141414;
+  font-weight: 600;
+}
+
+.mat-mdc-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-draft {
+  background: rgba(158,158,158,0.2);
+  color: #cbd5e1;
+}
+
+.status-pendingapproval {
+  background: rgba(255,152,0,0.2);
+  color: #fbbf24;
+}
+
+.status-approved {
+  background: rgba(59,130,246,0.2);
+  color: #60a5fa;
+}
+
+.status-received {
+  background: rgba(34,197,94,0.2);
+  color: #4ade80;
+}
+
+.status-rejected {
+  background: rgba(239,68,68,0.2);
+  color: #f87171;
+}
+
+/* =========================
+   BUTTON ENHANCEMENT
+========================= */
+
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, $accent-1, $accent-2);
+  border-radius: 14px;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba($accent-1, .4);
+  transition: all 0.2s;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  box-shadow: 0 6px 18px rgba($accent-2, .5);
+  transform: translateY(-1px);
+}
+
+.mat-mdc-raised-button {
+  border-radius: 14px;
+}
+
+/* =========================
+   DARK TABLE FIX
+========================= */
+
+/* add subtle neon header underline */
+.mat-mdc-header-cell {
+  position: relative;
+}
+.mat-mdc-header-cell::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: $accent-2;
+  opacity: 0.3;
+}
+
+
+/* Force table text color */
+.mat-mdc-table,
+.mat-mdc-row,
+.mat-mdc-cell,
+.mat-mdc-header-row,
+.mat-mdc-header-cell {
+ color: #262626 !important;
+}
+
+/* Header styling */
+.mat-mdc-header-cell {
+  color: #262626 !important;
+  font-weight: 600;
+}
+
+/* Table background */
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+/* Row hover */
+.mat-mdc-row:hover {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Paginator text */
+.mat-mdc-paginator {
+  color: #1e1e1e !important;
+}
+
+/* Sort icon color */
+.mat-sort-header-arrow {
+  color: #141414 !important;
+}
+
+/* ===== Fix Chrome Autofill in Dark Theme ===== */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+
+  -webkit-text-fill-color: #ffffff !important; /* keep text white */
+
+  box-shadow: 0 0 0px 1000px #2b3446 inset !important; 
+  /* use your actual input background color */
+
+  transition: background-color 9999s ease-in-out 0s;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+/* ===== Remove Chrome Autofill White Box + Border ===== */
+
+input,
+textarea,
+select {
+  border-radius: 8px; /* match your design */
+}
+
+/* Remove default focus outline */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Kill Chrome autofill styling completely */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+
+  -webkit-text-fill-color: #ffffff !important;
+
+  box-shadow: 0 0 0 1000px #2b3446 inset !important; /* your input bg */
+  border: none !important;
+  outline: none !important;
+
+  transition: background-color 9999s ease-in-out 0s;
+}

@@ -1,0 +1,41 @@
+<div class="glass-card">
+
+  <div class="header">
+    <h2>ROL Analytics</h2>
+    <button mat-raised-button color="primary" (click)="runRol()">
+      Run ROL
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- Chart -->
+  <div *ngIf="!loading">
+    <canvas baseChart
+      [data]="chartData"
+      [options]="chartOptions"
+      chartType="bar">
+    </canvas>
+  </div>
+
+</div>
+
+<!-- Below ROL -->
+<mat-card class="card mt">
+  <h3>Items Below ROL</h3>
+
+  <div *ngFor="let item of belowRolItems" class="list-item">
+    {{ item.itemName }} - Current: {{ item.currentStock }} | ROL: {{ item.rol }}
+  </div>
+</mat-card>
+
+<!-- Draft POs -->
+<mat-card class="card mt">
+  <h3>Auto Generated Draft POs</h3>
+
+  <div *ngFor="let po of draftPOs" class="list-item">
+    {{ po.poNumber }} - {{ po.vendorName }} - ₹ {{ po.totalAmount }}
+  </div>
+</mat-card>

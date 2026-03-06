@@ -1,0 +1,48 @@
+<mat-card class="card">
+
+  <h2>Goods Receipt Note (GRN)</h2>
+
+  <form [formGroup]="form" (ngSubmit)="searchPO()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Enter PO Number</mat-label>
+      <input matInput formControlName="poNumber">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+            type="submit"
+            [disabled]="form.invalid">
+      Search
+    </button>
+
+  </form>
+
+  <div *ngIf="loading" class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="poDetails && !loading" class="po-details">
+
+    <h3>PO Details</h3>
+
+    <p><strong>PO Number:</strong> {{ poDetails.poNumber }}</p>
+    <p><strong>Vendor:</strong> {{ poDetails.vendorName }}</p>
+    <p><strong>Total:</strong> ₹ {{ poDetails.totalAmount }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span class="status-badge"
+            [ngClass]="'status-' + poDetails.status.toLowerCase()">
+        {{ poDetails.status }}
+      </span>
+    </p>
+
+    <button mat-raised-button
+            color="accent"
+            (click)="confirmGRN()"
+            [disabled]="poDetails.status !== 'Approved'">
+      Confirm GRN
+    </button>
+
+  </div>
+
+</mat-card>

@@ -1,0 +1,115 @@
+/* Background */
+.register-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #0b1120, #050816);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Card */
+.register-card {
+  width: 380px;
+  padding: 40px 30px;
+  border-radius: 18px;
+  background: rgba(10, 20, 40, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.3),
+    0 0 40px rgba(255, 0, 255, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+/* Logo Section */
+.logo h2 {
+  color: #00f0ff;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+.logo p {
+  color: #9ca3af;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #00f0ff;
+  color: white;
+  outline: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-bottom: 1px solid #ff00ff;
+  box-shadow: 0 4px 8px rgba(255, 0, 255, 0.3);
+}
+
+/* Neon Button */
+.neon-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #00f0ff, #7c3aed);
+  color: white;
+  transition: 0.3s;
+}
+
+.neon-btn:hover {
+  box-shadow:
+    0 0 15px #00f0ff,
+    0 0 30px #7c3aed;
+}
+
+/* Footer */
+.footer-text {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.footer-text a {
+  color: #00f0ff;
+  text-decoration: none;
+}
+
+.input-group select {
+  width: 100%;
+  padding: 12px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #00f0ff;
+  color: white;
+  outline: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.input-group select:focus {
+  border-bottom: 1px solid #ff00ff;
+  box-shadow: 0 4px 8px rgba(255, 0, 255, 0.3);
+}
+
+.input-group select option {
+  background: #0b1120;
+  color: white;
+}
