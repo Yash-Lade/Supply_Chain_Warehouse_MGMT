@@ -21,7 +21,6 @@ namespace SCM.API.Controllers
         }
   
         // CREATE PURCHASE ORDER
-        
 
         [HttpPost]
         public IActionResult CreatePO(PurchaseOrderCreateDto dto)
@@ -91,32 +90,37 @@ namespace SCM.API.Controllers
         public IActionResult GetPO(int poId)
         {
             var po = _context.PurchaseOrders
-                .Include(p => p.Items)
-                .FirstOrDefault(p => p.Id == poId);
+                .Where(p => p.Id == poId)
+                .Select(p => new
+                {
+                    p.Id,
+                    p.PONumber,
+                    VendorName = p.Vendor.Name,
+                    p.Status,
+                    p.WarehouseId,
+
+                    Approvals = _context.Approvals
+                        .Where(a => a.ReferenceType == "PurchaseOrder" && a.ReferenceId == p.Id)
+                        .OrderBy(a => a.ApprovalLevel)
+                        .Select(a => new
+                        {
+                            level = a.ApprovalLevel,
+                            role = a.ApprovalLevel == 1 ? "HOD"
+                                   : a.ApprovalLevel == 2 ? "Finance"
+                                   : "Director",
+                            status = a.Status
+                        })
+                        .ToList(),
+
+                    p.TotalAmount,
+                    p.CreatedAt
+                })
+                .FirstOrDefault();
 
             if (po == null)
                 return NotFound("PO not found");
 
-            var result = new
-            {
-                po.Id,
-                po.PONumber,
-                po.VendorId,
-                po.WarehouseId,
-                po.Status,
-                po.TotalAmount,
-                po.CreatedAt,
-                Items = po.Items.Select(i => new
-                {
-                    i.Id,
-                    i.ItemId,
-                    i.OrderedQuantity,
-                    i.UnitPrice,
-                    i.ReceivedQuantity
-                })
-            };
-
-            return Ok(result);
+            return Ok(po);
         }
 
         // purchase order approvals
@@ -192,6 +196,18 @@ namespace SCM.API.Controllers
                     VendorName = po.Vendor.Name,
                     po.WarehouseId,
                     po.Status,
+                    Approvals = _context.Approvals
+                        .Where(a => a.ReferenceType == "PurchaseOrder" && a.ReferenceId == po.Id)
+                        .OrderBy(a => a.ApprovalLevel)
+                        .Select(a => new
+                        {
+                            level = a.ApprovalLevel,
+                            role = a.ApprovalLevel == 1 ? "HOD"
+                                   : a.ApprovalLevel == 2 ? "Finance"
+                                   : "Director",
+                            status = a.Status
+                        })
+                        .ToList(),
                     po.TotalAmount,
                     po.CreatedAt,
                     ItemCount = po.Items.Count
