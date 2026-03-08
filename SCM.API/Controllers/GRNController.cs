@@ -55,7 +55,7 @@ public class GRNController : ControllerBase
             {
                 int receivedQty = item.OrderedQuantity;
 
-                // 1️⃣ Create batch
+                // Create batch
                 var batch = new Batch
                 {
                     ItemId = item.ItemId,
@@ -67,7 +67,7 @@ public class GRNController : ControllerBase
                 _context.Batches.Add(batch);
                 _context.SaveChanges(); // to generate Batch.Id
 
-                // 2️⃣ Update stock
+                // Update stock
                 var stock = _context.Stock
                     .FirstOrDefault(s =>
                         s.BatchId == batch.Id &&
@@ -91,7 +91,7 @@ public class GRNController : ControllerBase
                     stock.LastUpdated = DateTime.UtcNow;
                 }
 
-                // 3️⃣ Insert ledger entry
+                // Insert ledger entry
                 var ledger = new StockLedger
                 {
                     ItemId = item.ItemId,
@@ -105,7 +105,7 @@ public class GRNController : ControllerBase
 
                 _context.StockLedger.Add(ledger);
 
-                // 4️⃣ Update PO item received qty
+                // Update PO item received qty
                 item.ReceivedQuantity = receivedQty;
             }
 
